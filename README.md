@@ -1,4 +1,3 @@
-
 <!-- Terminal Boot Sequence -->
 <div align="center">
 
@@ -19,53 +18,69 @@
 varun@backend-dev:~$ cat about.txt
 ```
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│  Name    : Varun Mendre                                             │
-│  Role    : Software Developer | Backend Engineer                    │
-│  Location: Pune, Maharashtra, India 🇮🇳                             │
-│  Status  : [ ● ONLINE ] Open to Collaborations                     │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  I'm a backend-focused developer who enjoys building systems that   │
-│  are clean, scalable, and production-ready. From designing REST     │
-│  APIs to wiring up CI/CD pipelines and cloud infrastructure, I      │
-│  like to own the full backend lifecycle — code, deploy, monitor.    │
-│  I believe great software is less about clever tricks and more      │
-│  about solid fundamentals and thoughtful architecture.              │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
+```diff
++ PROCESS LOADED: varun-mendre.profile
++ PID: 2025 | LOCATION: Pune, Maharashtra, IN 🇮🇳
++ ROLE: Software Developer | Backend Engineer
++ STATUS: ● ONLINE — Open to Collaborations
+
+  I'm a backend-focused developer who enjoys building systems that are
+  clean, scalable, and production-ready. From designing REST APIs to
+  wiring CI/CD pipelines and cloud infra — I own the full backend
+  lifecycle: code, ship, monitor, repeat.
+
+  I believe great software isn't about clever tricks.
+  It's about solid fundamentals and thoughtful architecture.
+
+- MOTTO: "Make it work → Make it right → Make it fast"
 ```
 
 ---
 
 ```bash
-varun@backend-dev:~$ skills --list --grouped
+varun@backend-dev:~$ cat /proc/skills/tree
 ```
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│  💻 LANGUAGES                                                        │
-│  ▸ C  ▸ C++ (STL)  ▸ JavaScript  ▸ Node.js                         │
-├──────────────────────────────────────────────────────────────────────┤
-│  ⚙️  BACKEND & FRAMEWORKS                                            │
-│  ▸ Express.js  ▸ REST APIs  ▸ Microservices  ▸ WebSockets           │
-│  ▸ RabbitMQ  ▸ Event-Driven Architecture                            │
-├──────────────────────────────────────────────────────────────────────┤
-│  🗄️  DATABASES                                                       │
-│  ▸ PostgreSQL  ▸ MongoDB  ▸ Redis                                   │
-├──────────────────────────────────────────────────────────────────────┤
-│  ☁️  DEVOPS & CLOUD                                                  │
-│  ▸ Git  ▸ AWS (EC2, S3, Lambda)  ▸ NGINX  ▸ PM2                    │
-│  ▸ Docker  ▸ CI/CD Pipelines  ▸ GitHub Webhooks                     │
-├──────────────────────────────────────────────────────────────────────┤
-│  🎨 FRONTEND                                                         │
-│  ▸ Tailwind CSS  ▸ React.js (MERN Stack)                            │
-├──────────────────────────────────────────────────────────────────────┤
-│  🔌 INTEGRATIONS & OTHER                                             │
-│  ▸ Razorpay  ▸ Stripe  ▸ Resend API  ▸ OpenAI API                  │
-│  ▸ Observability  ▸ Telegram Bot API                                │
-└──────────────────────────────────────────────────────────────────────┘
+```js
+varun@skills
+ ├── 💻 languages/
+ │    ├── C
+ │    ├── C++ (STL)
+ │    ├── JavaScript
+ │    └── Node.js
+ │
+ ├── ⚙️  backend/
+ │    ├── Express.js
+ │    ├── REST APIs
+ │    ├── Microservices
+ │    ├── Event-Driven Architecture
+ │    ├── RabbitMQ
+ │    └── WebSockets
+ │
+ ├── 🗄️  databases/
+ │    ├── PostgreSQL
+ │    ├── MongoDB
+ │    └── Redis
+ │
+ ├── ☁️  devops-cloud/
+ │    ├── AWS  (EC2 · S3 · Lambda)
+ │    ├── Docker
+ │    ├── NGINX
+ │    ├── PM2
+ │    ├── GitHub Webhooks
+ │    └── CI/CD Pipelines
+ │
+ ├── 🎨 frontend/
+ │    ├── Tailwind CSS
+ │    └── React.js (MERN)
+ │
+ └── 🔌 integrations/
+      ├── Razorpay
+      ├── Stripe
+      ├── Resend API
+      ├── OpenAI API (GPT-4o-mini)
+      ├── Telegram Bot API
+      └── Observability & Monitoring
 ```
 
 <div align="center">
@@ -92,107 +107,155 @@ varun@backend-dev:~$ skills --list --grouped
 ---
 
 ```bash
-varun@backend-dev:~$ projects --featured --verbose
+varun@backend-dev:~$ git log --projects --oneline --decorate
 ```
 
 ```
-[1/2] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  📦 PROJECT   : Personal Cloud Drive
-  🔗 STACK     : MongoDB · Express.js · React.js · Node.js
-  📝 DESC      : A professional, secure, full-featured personal cloud
-                 storage system. Supports file uploads, folder nav,
-                 sharing, permissions management & real-time storage
-                 tracking — delivering a smooth, premium cloud UX.
-  🔑 FEATURES  : Auth · File Ops · Folder Nav · Sharing · Permissions
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-[2/2] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  📦 PROJECT   : Custom CI/CD Server
-  🔗 STACK     : Node.js · AWS EC2 · SSH · GitHub Webhooks · Telegram
-  📝 DESC      : A lightweight, custom-built CI/CD system for automating
-                 personal project deployments. Listens for GitHub webhooks,
-                 verifies signatures, triggers remote deployment scripts
-                 via SSH on EC2, and pings real-time status via Telegram.
-  🔑 FEATURES  : Webhook Listener · Signature Verify · SSH Deploy · Alerts
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+* f3a91bc (HEAD -> main)  🚀 feat: Personal Cloud Drive
+* c7d82e1                  ⚙️  feat: Custom CI/CD Server
+* b2c49f3                  📨 feat: Event-Driven Notification Service
+* a1d38c0                  🖼️  feat: Serverless Image Compressor
+* 98ef712                  🧠 feat: AI Study Assistant Backend
 ```
 
 ---
 
 ```bash
-varun@backend-dev:~$ projects --mini --all
+varun@backend-dev:~$ docker inspect personal-cloud-drive
 ```
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│  🔸 Event-Driven Notification Service                                │
-│     Node.js · RabbitMQ · PostgreSQL · Resend API                    │
-│     Production-ready microservices notification system using         │
-│     clean architecture — Service/Repo pattern, Strategy pattern,    │
-│     middleware validation, and centralized config management.        │
-├──────────────────────────────────────────────────────────────────────┤
-│  🔸 Serverless Image Compressor                                      │
-│     AWS Lambda · S3 · Express.js                                    │
-│     Event-driven serverless pipeline that auto-compresses images     │
-│     uploaded via Express endpoint or directly into an S3 bucket.    │
-├──────────────────────────────────────────────────────────────────────┤
-│  🔸 AI Study Assistant Backend                                       │
-│     Node.js · OpenAI GPT-4o-mini · PDF/DOCX/OCR                    │
-│     Extracts summaries & generates MCQ quizzes from study docs.     │
-│     Tracks progress, evaluates answers, identifies weak areas.      │
-│     Clean architecture: Controllers → Services → Models.            │
-└──────────────────────────────────────────────────────────────────────┘
+```json
+{
+  "name":    "Personal Cloud Drive",
+  "stack":   ["MongoDB", "Express.js", "React.js", "Node.js"],
+  "status":  "RUNNING ✅",
+  "description": "Professional, secure, full-featured personal cloud
+                  storage system. Effortless file uploads, folder nav,
+                  sharing, permissions & real-time storage tracking.",
+  "features": [
+    "JWT Auth & Role-based Permissions",
+    "File Upload · Folder Navigation · Sharing",
+    "Real-time Storage Tracking",
+    "Premium cloud UX on MERN stack"
+  ]
+}
 ```
 
 ---
 
 ```bash
-varun@backend-dev:~$ experience --current
+varun@backend-dev:~$ docker inspect custom-cicd-server
 ```
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│  🏢 ROLE     : Web Developer Intern                                  │
-│  🏦 COMPANY  : Acmegrade Pvt. Ltd.                                  │
-│  📅 PERIOD   : Jan 2025 – Mar 2025                                  │
-│  📍 TYPE     : Internship                                           │
-└──────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-```bash
-varun@backend-dev:~$ learning --roadmap --active
-```
-
-```
-[ ██████████░░░░░░░░░░ ]  TypeScript                  → In Progress
-[ ████████░░░░░░░░░░░░ ]  Monitoring & Observability  → In Progress
-[ ██████░░░░░░░░░░░░░░ ]  Docker & Containerization   → In Progress
-[ ████░░░░░░░░░░░░░░░░ ]  Cryptography                → Exploring
-[ ████░░░░░░░░░░░░░░░░ ]  WebSockets                  → Exploring
+```json
+{
+  "name":    "Custom CI/CD Server",
+  "stack":   ["Node.js", "AWS EC2", "SSH", "GitHub Webhooks", "Telegram"],
+  "status":  "RUNNING ✅",
+  "description": "Lightweight custom CI/CD system for automating personal
+                  project deployments end-to-end.",
+  "pipeline": [
+    "① GitHub push event  →  Webhook received",
+    "② HMAC signature     →  Verified ✓",
+    "③ SSH into EC2       →  Deploy script triggered",
+    "④ Build complete     →  Telegram alert sent 📲"
+  ]
+}
 ```
 
 ---
 
 ```bash
-varun@backend-dev:~$ stats --github --live
+varun@backend-dev:~$ ls -la ./mini-projects/ --verbose
+```
+
+```yaml
+# ── EVENT-DRIVEN NOTIFICATION SERVICE ──────────────────────────────
+name:    event-driven-notification-service
+runtime: Node.js
+deps:    [RabbitMQ, PostgreSQL, Resend API]
+arch:    Service/Repository · Handler Registry (Strategy Pattern)
+desc:    Production-ready scalable notification system using
+         microservices patterns, middleware validation & clean config.
+
+# ── SERVERLESS IMAGE COMPRESSOR ────────────────────────────────────
+name:    serverless-image-compressor
+runtime: AWS Lambda · S3 · Express.js
+arch:    Event-driven · Serverless
+desc:    Auto-compresses images on S3 upload or Express endpoint hit.
+         Zero servers, infinite scale.
+
+# ── AI STUDY ASSISTANT BACKEND ─────────────────────────────────────
+name:    ai-study-assistant-backend
+runtime: Node.js · OpenAI GPT-4o-mini
+input:   [PDF, DOCX, Images (OCR)]
+arch:    Controllers → Services → Models
+features:
+  - AI-powered summaries from documents
+  - Auto MCQ generation + answer evaluation
+  - Weak area detection & progress tracking
+```
+
+---
+
+```bash
+varun@backend-dev:~$ systemctl status experience.service
+```
+
+```
+● experience.service — Work History
+     Loaded: loaded (/etc/varun/career.conf)
+     Active: ✅ completed since Mar 2025
+
+  Jan 2025 → Mar 2025
+  ├── 🏢 Role    : Web Developer Intern
+  ├── 🏦 Company : Acmegrade Pvt. Ltd.
+  └── 📍 Type    : Internship · On-site · Pune
+```
+
+---
+
+```bash
+varun@backend-dev:~$ watch -n1 learning --roadmap
+```
+
+```
+Every 1.0s: learning --roadmap                   [Live Feed]
+
+  SKILL                       PROGRESS              STATUS
+  ─────────────────────────────────────────────────────────
+  TypeScript              ████████████░░░░░░░░    In Progress
+  Monitoring & Observ.    ██████████░░░░░░░░░░    In Progress
+  Docker & Containers     ████████░░░░░░░░░░░░    In Progress
+  Cryptography            █████░░░░░░░░░░░░░░░    Exploring
+  WebSockets              █████░░░░░░░░░░░░░░░    Exploring
+  ─────────────────────────────────────────────────────────
+  [Ctrl+C to stop]  |  Next update in: 1s...
+```
+
+---
+
+```bash
+varun@backend-dev:~$ neofetch --github
 ```
 
 <div align="center">
 
-![Varun's GitHub Stats](https://github-readme-stats.vercel.app/api?username=VarunMendre&show_icons=true&theme=chartreuse-dark&bg_color=0d0d0d&title_color=00FF41&icon_color=00FF41&text_color=ffffff&border_color=00FF41&hide_border=false)
+<img src="https://github-readme-stats.vercel.app/api?username=VarunMendre&show_icons=true&theme=chartreuse-dark&bg_color=0d0d0d&title_color=00FF41&icon_color=00FF41&text_color=ffffff&border_color=00FF41" height="165"/>
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=VarunMendre&layout=compact&theme=chartreuse-dark&bg_color=0d0d0d&title_color=00FF41&text_color=ffffff&border_color=00FF41" height="165"/>
+
+</div>
+
+<div align="center">
 
 ![GitHub Streak](https://streak-stats.demolab.com?user=VarunMendre&theme=terminal&background=0D0D0D&border=00FF41&stroke=00FF41&ring=00FF41&fire=FF6B35&currStreakLabel=00FF41&sideLabels=00FF41&dates=888888)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=VarunMendre&layout=compact&theme=chartreuse-dark&bg_color=0d0d0d&title_color=00FF41&text_color=ffffff&border_color=00FF41)
 
 </div>
 
 ---
 
 ```bash
-varun@backend-dev:~$ leetcode --profile
+varun@backend-dev:~$ open leetcode --profile
 ```
 
 <div align="center">
@@ -204,21 +267,24 @@ varun@backend-dev:~$ leetcode --profile
 ---
 
 ```bash
-varun@backend-dev:~$ contact --connect
+varun@backend-dev:~$ curl -X GET https://varun.dev/api/contact
 ```
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│                        // REACH ME AT                               │
-│                                                                      │
-│  📧  varunmm0404@gmail.com                                          │
-│  💼  linkedin.com/in/varun-mendre-b241b1307                         │
-│  🐦  x.com/VarunMendr35360                                          │
-│  🌐  varunmendre-portfolio.cloudvault.cloud                         │
-│  💻  leetcode.com/u/varunmendre                                     │
-│                                                                      │
-│  [ ✅ Open to Collaborations ]  [ ❌ Not Available for Freelance ]  │
-└──────────────────────────────────────────────────────────────────────┘
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "name":       "Varun Mendre",
+  "email":      "varunmm0404@gmail.com",
+  "linkedin":   "linkedin.com/in/varun-mendre-b241b1307",
+  "twitter":    "x.com/VarunMendr35360",
+  "portfolio":  "varunmendre-portfolio.cloudvault.cloud",
+  "leetcode":   "leetcode.com/u/varunmendre",
+  "collab":     true,
+  "freelance":  false,
+  "status":     "● ONLINE — Let's build something."
+}
 ```
 
 <div align="center">
@@ -234,14 +300,15 @@ varun@backend-dev:~$ contact --connect
 ---
 
 ```bash
-varun@backend-dev:~$ fun --facts
+varun@backend-dev:~$ cat /dev/random | grep fun-facts
 ```
 
 ```
-> I debug with console.log and I'm not ashamed of it.
-> My ideal stack: Node.js + PostgreSQL + Redis + NGINX + a strong coffee ☕
-> I believe: "Make it work → Make it right → Make it fast"
-> I deploy on Fridays... and somehow survive. 🫡
+[stdout] I debug with console.log and I'm not ashamed of it.
+[stdout] Ideal stack: Node.js + PostgreSQL + Redis + NGINX + ☕
+[stdout] I deploy on Fridays... and somehow survive 🫡
+[stdout] I don't write code, I write infrastructure that happens to have code in it.
+[SIGTERM] Process complete. Have a great day.
 ```
 
 ---
@@ -249,12 +316,11 @@ varun@backend-dev:~$ fun --facts
 <div align="center">
 
 ```
-╔══════════════════════════════════════════════════════════════════╗
-║   Thanks for visiting! If something I built helps you —          ║
-║   drop a ⭐ on the repo. It means a lot.                         ║
-║                                                                  ║
-║              [ SESSION TERMINATED — GOODBYE ]                   ║
-╚══════════════════════════════════════════════════════════════════╝
+  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+    Thanks for stopping by — if something I built helped you,
+              drop a ⭐ on the repo. It means a lot.
+  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+         [ exit 0 — SESSION TERMINATED SUCCESSFULLY ]
 ```
 
 ![Profile Views](https://komarev.com/ghpvc/?username=VarunMendre&color=00FF41&style=flat-square&label=PROFILE+VIEWS)
