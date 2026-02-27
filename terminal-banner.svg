@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520">
+  <defs>
+    <style>
+      .mono { font-family: 'Courier New', Courier, monospace; }
+
+      @keyframes blink {
+        0%,49%  { opacity:1; }
+        50%,100%{ opacity:0; }
+      }
+      @keyframes flicker {
+        0%,100%{ opacity:1; }
+        3%     { opacity:.92; }
+        5%     { opacity:1; }
+        48%    { opacity:1; }
+        50%    { opacity:.95; }
+        52%    { opacity:1; }
+      }
+      @keyframes borderPulse {
+        0%,100%{ stroke-opacity:.55; }
+        50%    { stroke-opacity:1; }
+      }
+      @keyframes cornerBlink {
+        0%,100%{ opacity:1; }
+        50%    { opacity:.2; }
+      }
+
+      /* WHOAMI typing: mask shrinks from right, revealing text left-to-right */
+      /* "whoami" = 6 chars. starts t=0.4s, 0.09s/char */
+      @keyframes typeWhoami {
+        0%   { x: 168px; width: 200px; }
+        100% { x: 370px; width: 0px; }
+      }
+
+      /* VARUN pops in at t=1.4s */
+      @keyframes popVarun {
+        0%  { opacity:0; transform: translateY(8px); }
+        60% { opacity:1; transform: translateY(0); }
+        100%{ opacity:1; transform: translateY(0); }
+      }
+
+      /* MENDRE pops in at t=2.0s */
+      @keyframes popMendre {
+        0%  { opacity:0; transform: translateY(8px); }
+        60% { opacity:1; transform: translateY(0); }
+        100%{ opacity:1; transform: translateY(0); }
+      }
+
+      /* prompt 2 fades in at t=2.9s */
+      @keyframes fadeIn {
+        0%  { opacity:0; }
+        100%{ opacity:1; }
+      }
+
+      /* ls typing mask */
+      @keyframes typeLs {
+        0%   { x: 168px; width: 200px; }
+        100% { x: 300px; width: 0px; }
+      }
+
+      /* Role 1: appears at 0s of its own timeline, fades at 55%, gone at 65% */
+      @keyframes role1cycle {
+        0%   { opacity:0; }
+        5%   { opacity:1; }
+        55%  { opacity:1; }
+        65%  { opacity:0; }
+        100% { opacity:0; }
+      }
+
+      /* Role 2: hidden until 65%, visible until 95%, then fades for reset */
+      @keyframes role2cycle {
+        0%   { opacity:0; }
+        65%  { opacity:0; }
+        75%  { opacity:1; }
+        95%  { opacity:1; }
+        100% { opacity:0; }
+      }
+
+      .screen  { animation: flicker 7s ease-in-out infinite; }
+      .border  { animation: borderPulse 3s ease-in-out infinite; }
+      .cur     { animation: blink 1s step-end infinite; }
+
+      .mask-whoami {
+        animation: typeWhoami 0.7s steps(7,end) 0.4s both;
+      }
+      .varun-wrap {
+        opacity:0;
+        animation: popVarun 0.4s ease-out 1.4s both;
+      }
+      .mendre-wrap {
+        opacity:0;
+        animation: popMendre 0.4s ease-out 2.0s both;
+      }
+      .prompt2-wrap {
+        opacity:0;
+        animation: fadeIn 0.1s steps(1,end) 2.9s both;
+      }
+      .mask-ls {
+        animation: typeLs 0.5s steps(6,end) 3.1s both;
+      }
+      .role1 {
+        opacity:0;
+        animation: role1cycle 3.5s ease-in-out 3.8s infinite;
+      }
+      .role2 {
+        opacity:0;
+        animation: role2cycle 3.5s ease-in-out 3.8s infinite;
+      }
+    </style>
+
+    <pattern id="scan" x="0" y="0" width="800" height="4" patternUnits="userSpaceOnUse">
+      <rect width="800" height="2" fill="rgba(0,0,0,0.12)"/>
+    </pattern>
+  </defs>
+
+  <!-- BACKGROUND -->
+  <rect width="800" height="520" fill="#1c1d1c"/>
+
+  <g class="screen">
+
+    <!-- OUTER BORDER -->
+    <rect x="12" y="12" width="776" height="496" rx="3" fill="none"
+          stroke="#d0d0d0" stroke-width="1.5" class="border"/>
+    <rect x="20" y="20" width="760" height="480" rx="2" fill="none"
+          stroke="#d0d0d0" stroke-width=".5" stroke-opacity=".2"/>
+
+    <!-- CORNERS -->
+    <g stroke="#d0d0d0" stroke-width="1.5" fill="none">
+      <g style="animation: cornerBlink 2s 0s infinite;">
+        <line x1="12" y1="30" x2="12" y2="12"/><line x1="12" y1="12" x2="30" y2="12"/>
+      </g>
+      <g style="animation: cornerBlink 2s .5s infinite;">
+        <line x1="788" y1="30" x2="788" y2="12"/><line x1="788" y1="12" x2="770" y2="12"/>
+      </g>
+      <g style="animation: cornerBlink 2s 1s infinite;">
+        <line x1="12" y1="490" x2="12" y2="508"/><line x1="12" y1="508" x2="30" y2="508"/>
+      </g>
+      <g style="animation: cornerBlink 2s 1.5s infinite;">
+        <line x1="788" y1="490" x2="788" y2="508"/><line x1="788" y1="508" x2="770" y2="508"/>
+      </g>
+    </g>
+
+    <!-- ══════════════════════════════
+         BLOCK 1: whoami prompt
+    ══════════════════════════════ -->
+    <rect x="32" y="34" width="736" height="46" rx="2"
+          fill="#252625" stroke="#d0d0d0" stroke-width=".8" stroke-opacity=".35"/>
+    <rect x="32" y="34" width="4"  height="46" rx="1" fill="#d0d0d0" fill-opacity=".8"/>
+
+    <!-- static part: varun@dev:~$ -->
+    <text x="48" y="63" class="mono" font-size="15" fill="#d0d0d0" letter-spacing=".4">
+      varun@dev:~$&#160;whoami
+    </text>
+
+    <!-- typing mask: white rect that slides away revealing "whoami" -->
+    <rect y="36" height="42" fill="#252625" class="mask-whoami"/>
+
+    <!-- blinking cursor (always visible at end of line) -->
+    <rect x="374" y="47" width="9" height="17" fill="#d0d0d0" class="cur"/>
+
+    <!-- ══════════════════════════════
+         BLOCK 2: VARUN MENDRE (outlined pixel style)
+    ══════════════════════════════ -->
+
+    <g class="varun-wrap">
+      <text x="38" y="178"
+            class="mono" font-size="100" font-weight="900"
+            fill="none" stroke="#d0d0d0" stroke-width="2"
+            letter-spacing="6" paint-order="stroke">VARUN</text>
+    </g>
+
+    <g class="mendre-wrap">
+      <text x="38" y="296"
+            class="mono" font-size="100" font-weight="900"
+            fill="none" stroke="#d0d0d0" stroke-width="2"
+            letter-spacing="2" paint-order="stroke">MENDRE</text>
+    </g>
+
+    <!-- ══════════════════════════════
+         BLOCK 3: ls prompt
+    ══════════════════════════════ -->
+    <g class="prompt2-wrap">
+      <rect x="32" y="318" width="736" height="46" rx="2"
+            fill="#252625" stroke="#d0d0d0" stroke-width=".8" stroke-opacity=".35"/>
+      <rect x="32" y="318" width="4" height="46" rx="1" fill="#d0d0d0" fill-opacity=".8"/>
+
+      <text x="48" y="347" class="mono" font-size="15" fill="#d0d0d0" letter-spacing=".4">
+        varun@dev:~$&#160;ls&#160;./roles
+      </text>
+
+      <!-- typing mask for ls command -->
+      <rect y="320" height="42" fill="#252625" class="mask-ls"/>
+
+      <rect x="302" y="329" width="9" height="17" fill="#d0d0d0" class="cur"/>
+    </g>
+
+    <!-- ══════════════════════════════
+         BLOCK 4: Role output — switching
+    ══════════════════════════════ -->
+
+    <!-- Role 1: Software Developer -->
+    <g class="role1">
+      <rect x="32" y="382" width="736" height="58" rx="2"
+            fill="#252625" stroke="#d0d0d0" stroke-width=".8" stroke-opacity=".35"/>
+      <rect x="32" y="382" width="4" height="58" fill="#d0d0d0"/>
+      <text x="52" y="418" class="mono" font-size="20" fill="#d0d0d0" letter-spacing="1.5">
+        &gt;&#160;Software&#160;Developer
+      </text>
+      <rect x="718" y="400" width="10" height="19" fill="#d0d0d0" class="cur"/>
+    </g>
+
+    <!-- Role 2: Backend Developer -->
+    <g class="role2">
+      <rect x="32" y="382" width="736" height="58" rx="2"
+            fill="#252625" stroke="#d0d0d0" stroke-width=".8" stroke-opacity=".35"/>
+      <rect x="32" y="382" width="4" height="58" fill="#d0d0d0"/>
+      <text x="52" y="418" class="mono" font-size="20" fill="#d0d0d0" letter-spacing="1.5">
+        &gt;&#160;Backend&#160;Developer
+      </text>
+      <rect x="682" y="400" width="10" height="19" fill="#d0d0d0" class="cur"/>
+    </g>
+
+    <!-- STATUS BAR -->
+    <text x="48" y="500" class="mono" font-size="10" fill="#d0d0d0" fill-opacity=".3">
+      [CONNECTED]&#160;&#160;///&#160;&#160;github.com/varunmendre&#160;&#160;///&#160;&#160;session: active
+    </text>
+    <text x="720" y="500" class="mono" font-size="10" fill="#d0d0d0" fill-opacity=".3">v1.0.0</text>
+
+    <!-- SCANLINES -->
+    <rect width="800" height="520" fill="url(#scan)" opacity=".6"/>
+
+    <!-- BOOT SWEEP -->
+    <rect x="0" y="0" width="800" height="3" fill="#ffffff" opacity="0">
+      <animate attributeName="opacity" values="0;.25;0" dur="1.0s" begin="0s" repeatCount="1"/>
+      <animateTransform attributeName="transform" type="translate"
+                        from="0,-5" to="0,525"
+                        dur="1.0s" begin="0s" repeatCount="1"/>
+    </rect>
+
+  </g>
+</svg>
