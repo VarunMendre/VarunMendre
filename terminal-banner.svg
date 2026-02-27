@@ -3,138 +3,138 @@
     <style>
       .mono { font-family: 'Courier New', Courier, monospace; }
 
-      /* ── cursor blink ── */
+      /* ── Smooth cursor blink (more natural) ── */
       @keyframes blink {
         0%,49%  { opacity:1; }
         50%,100%{ opacity:0; }
       }
 
-      /* ── screen flicker (subtle, like real CRT) ── */
+      /* ── Screen flicker (subtle CRT effect) ── */
       @keyframes flicker {
         0%   { opacity:1; }
-        2%   { opacity:.94; }
+        2%   { opacity:.95; }
         3%   { opacity:1; }
         60%  { opacity:1; }
-        61%  { opacity:.96; }
+        61%  { opacity:.97; }
         62%  { opacity:1; }
         100% { opacity:1; }
       }
 
-      /* ── glow pulse on border ── */
+      /* ── Smooth glow pulse on border ── */
       @keyframes glow {
         0%,100%{ filter: drop-shadow(0 0 2px #00ff41); }
-        50%    { filter: drop-shadow(0 0 6px #00ff41); }
+        50%    { filter: drop-shadow(0 0 5px #00ff41); }
       }
 
-      /* whoami mask: starts covering text (width=200), shrinks to 0 */
+      /* ── Enhanced smooth typing animation ── */
       @keyframes typeWhoami {
         0%   { width:120px; }
         100% { width:0px;   }
       }
       .mask-cmd1 {
-        animation: typeWhoami 0.91s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s both;
+        animation: typeWhoami 0.85s steps(7,end) 0.9s both;
       }
 
-      /* cursor moves right as typing happens */
+      /* ── Smooth cursor movement during typing ── */
       @keyframes cursorWhoami {
         0%   { x:196px; }
         100% { x:312px; }
       }
       .cur-cmd1-move {
-        animation: cursorWhoami 0.91s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s both;
+        animation: cursorWhoami 0.85s steps(7,end) 0.9s both;
       }
       .cur-cmd1 {
-        animation: blink 0.7s step-end infinite;
+        animation: blink 0.65s step-end infinite;
       }
 
-      /* VARUN: fade+slide in from left */
+      /* ── Smooth name reveal (VARUN) ── */
       @keyframes slideVarun {
-        0%  { opacity:0; transform:translateX(-30px) translateY(10px); }
-        100%{ opacity:1; transform:translateX(0) translateY(0); }
+        0%  { opacity:0; transform:translateY(12px); }
+        100%{ opacity:1; transform:translateY(0); }
       }
       .varun-g {
         opacity:0;
-        animation: slideVarun 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.2s both;
+        animation: slideVarun 0.4s cubic-bezier(0.34,1.56,0.64,1) 2.1s both;
       }
 
-      /* MENDRE: fade+slide in from left with slight delay */
+      /* ── Smooth name reveal (MENDRE) ── */
       @keyframes slideMendre {
-        0%  { opacity:0; transform:translateX(-30px) translateY(10px); }
-        100%{ opacity:1; transform:translateX(0) translateY(0); }
+        0%  { opacity:0; transform:translateY(12px); }
+        100%{ opacity:1; transform:translateY(0); }
       }
       .mendre-g {
         opacity:0;
-        animation: slideMendre 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 2.75s both;
+        animation: slideMendre 0.4s cubic-bezier(0.34,1.56,0.64,1) 2.6s both;
       }
 
-      /* prompt 2 appears with smooth fade */
-      @keyframes fadeIn {
-        0%  { opacity:0; }
-        100%{ opacity:1; }
+      /* ── Prompt 2 smooth entrance ── */
+      @keyframes popIn {
+        0%  { opacity:0; transform:translateY(-2px); }
+        100%{ opacity:1; transform:translateY(0); }
       }
       .prompt2-g {
         opacity:0;
-        animation: fadeIn 0.15s ease-out 4.5s both;
+        animation: popIn 0.08s ease-out 4.4s both;
       }
 
-      /* ls ./roles typing mask */
+      /* ── Smooth ls ./roles typing ── */
       @keyframes typeLs {
         0%   { width:170px; }
         100% { width:0px;   }
       }
       .mask-cmd2 {
-        animation: typeLs 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 5.3s both;
+        animation: typeLs 1.2s steps(10,end) 5.2s both;
       }
 
-      /* ls cursor move */
+      /* ── Smooth ls cursor movement ── */
       @keyframes cursorLs {
         0%   { x:196px; }
         100% { x:366px; }
       }
       .cur-cmd2-move {
-        animation: cursorLs 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 5.3s both;
+        animation: cursorLs 1.2s steps(10,end) 5.2s both;
       }
       .cur-cmd2 {
-        animation: blink 0.7s step-end infinite;
+        animation: blink 0.65s step-end infinite;
       }
 
-      /* output box slides in smooth */
+      /* ── Smooth output box entrance ── */
       @keyframes slideBox {
-        0%  { opacity:0; transform:translateY(15px) scaleY(0.92); }
-        100%{ opacity:1; transform:translateY(0) scaleY(1); }
+        0%  { opacity:0; transform:translateY(6px); }
+        100%{ opacity:1; transform:translateY(0); }
       }
       .output-box {
         opacity:0;
-        animation: slideBox 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 7.2s both;
-        transform-origin: top left;
+        animation: slideBox 0.25s cubic-bezier(0.34,1.56,0.64,1) 7.0s both;
       }
 
-      /* Software Developer: smooth fade transitions */
+      /* ── Smooth role transitions (Software Developer) ── */
       @keyframes role1life {
-        0%    { opacity:0; transform:translateX(10px); }
-        2%    { opacity:1; transform:translateX(0); }
-        55%   { opacity:1; transform:translateX(0); }
-        68%   { opacity:0; transform:translateX(-10px); }
-        100%  { opacity:0; transform:translateX(-10px); }
+        0%    { opacity:0; transform:translateX(-4px); }
+        3%    { opacity:1; transform:translateX(0); }
+        53%   { opacity:1; transform:translateX(0); }
+        68%   { opacity:0; transform:translateX(4px); }
+        100%  { opacity:0; transform:translateX(4px); }
       }
       .role1-text {
         opacity:0;
-        animation: role1life 4.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 7.4s infinite;
+        animation: role1life 4.2s ease-in-out 7.2s infinite;
       }
 
-      /* Backend Developer: fade transition with smooth entry/exit */
+      /* ── Smooth role transitions (Backend Developer) ── */
       @keyframes role2life {
-        0%    { opacity:0; transform:translateX(10px); }
-        65%   { opacity:0; transform:translateX(10px); }
-        78%   { opacity:1; transform:translateX(0); }
-        95%   { opacity:1; transform:translateX(0); }
-        100%  { opacity:0; transform:translateX(-10px); }
+        0%    { opacity:0; transform:translateX(-4px); }
+        62%   { opacity:0; transform:translateX(-4px); }
+        75%   { opacity:1; transform:translateX(0); }
+        93%   { opacity:1; transform:translateX(0); }
+        100%  { opacity:0; transform:translateX(4px); }
       }
       .role2-text {
         opacity:0;
-        animation: role2life 4.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 7.4s infinite;
+        animation: role2life 4.2s ease-in-out 7.2s infinite;
       }
 
+      /* ── Enhance screen and border effects ── */
       .screen-g { animation: flicker 8s ease-in-out infinite; }
       .border-g  { animation: glow 3s ease-in-out infinite; }
 
@@ -273,9 +273,9 @@
 
     <!-- boot sweep -->
     <rect x="0" y="32" width="780" height="3" fill="#00ff41" opacity="0">
-      <animate attributeName="opacity" values="0;.4;0" dur="0.8s" begin="0s" repeatCount="1"/>
+      <animate attributeName="opacity" values="0;.4;0" dur="0.75s" begin="0s" repeatCount="1"/>
       <animateTransform attributeName="transform" type="translate"
-                        from="0,0" to="0,450" dur="0.8s" begin="0s" repeatCount="1"/>
+                        from="0,0" to="0,450" dur="0.75s" begin="0s" repeatCount="1"/>
     </rect>
 
   </g>
