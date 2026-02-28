@@ -1,5 +1,5 @@
 <div align="center">
 
-![](./terminal-banner-optimized.svg)
+![](./terminal-banner-final.svg)
 
 </div>
