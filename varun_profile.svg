@@ -1,0 +1,463 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 900" width="780" height="900">
+  <defs>
+    <style>
+      .mono { font-family: 'Courier New', Courier, monospace; }
+
+      /* ── Cursor blink ── */
+      @keyframes blink {
+        0%,49%  { opacity:1; }
+        50%,100%{ opacity:0; }
+      }
+
+      /* ── Screen flicker ── */
+      @keyframes flicker {
+        0%   { opacity:1; }
+        2%   { opacity:.95; }
+        3%   { opacity:1; }
+        60%  { opacity:1; }
+        61%  { opacity:.97; }
+        62%  { opacity:1; }
+        100% { opacity:1; }
+      }
+
+      /* ── Glow pulse ── */
+      @keyframes glow {
+        0%,100%{ filter: drop-shadow(0 0 2px #00ff41); }
+        50%    { filter: drop-shadow(0 0 5px #00ff41); }
+      }
+
+      /* ── Generic appear ── */
+      @keyframes charAppear { from { opacity:0; } to { opacity:1; } }
+      @keyframes slideBox {
+        0%  { opacity:0; transform:translateY(6px); }
+        100%{ opacity:1; transform:translateY(0); }
+      }
+      @keyframes popIn {
+        0%  { opacity:0; transform:translateY(-2px); }
+        100%{ opacity:1; transform:translateY(0); }
+      }
+      @keyframes slideVarun {
+        0%  { opacity:0; transform:translateY(12px); }
+        100%{ opacity:1; transform:translateY(0); }
+      }
+      @keyframes slideMendre {
+        0%  { opacity:0; transform:translateY(12px); }
+        100%{ opacity:1; transform:translateY(0); }
+      }
+
+      .screen-g { animation: flicker 8s ease-in-out infinite; }
+      .border-g  { animation: glow 3s ease-in-out infinite; }
+
+      /* ══════════════════════════════════════
+         TIMING PLAN
+         ────────────────────────────────────
+         0.90s – 1.62s : CMD1 "whoami" types
+         2.10s          : VARUN slides in
+         2.60s          : MENDRE slides in
+         4.40s          : PROMPT2 appears
+         5.20s – 6.40s : CMD2 "ls ./roles" types
+         7.00s          : output-box1 appears (roles)
+         7.20s          : role cycling starts
+
+         9.50s          : PROMPT3 appears
+        10.20s – 11.72s: CMD3 "cat ./skills.txt" types (15 chars)
+        12.20s          : skills-box appears
+        12.40s          : skill lines fade in (staggered 0.25s each)
+
+        17.00s          : PROMPT4 appears
+        17.70s – 19.18s: CMD4 "ls Projects/" types (13 chars)
+        19.60s          : projects-box appears
+        19.80s          : project items stagger in
+        ══════════════════════════════════════ */
+
+      /* ── NAME reveals ── */
+      .varun-g  { opacity:0; animation: slideVarun  0.4s cubic-bezier(0.34,1.56,0.64,1) 2.1s both; }
+      .mendre-g { opacity:0; animation: slideMendre 0.4s cubic-bezier(0.34,1.56,0.64,1) 2.6s both; }
+
+      /* ── PROMPT 2 ── */
+      .prompt2-g { opacity:0; animation: popIn 0.08s ease-out 4.4s both; }
+
+      /* ── CMD1 chars (whoami) ── */
+      .c1-1 { opacity:0; animation: charAppear 0s 0.90s both; }
+      .c1-2 { opacity:0; animation: charAppear 0s 1.02s both; }
+      .c1-3 { opacity:0; animation: charAppear 0s 1.14s both; }
+      .c1-4 { opacity:0; animation: charAppear 0s 1.26s both; }
+      .c1-5 { opacity:0; animation: charAppear 0s 1.38s both; }
+      .c1-6 { opacity:0; animation: charAppear 0s 1.50s both; }
+
+      /* ── CMD2 chars (ls ./roles) 10 chars ── */
+      .c2-1  { opacity:0; animation: charAppear 0s 5.20s both; }
+      .c2-2  { opacity:0; animation: charAppear 0s 5.32s both; }
+      .c2-3  { opacity:0; animation: charAppear 0s 5.44s both; }
+      .c2-4  { opacity:0; animation: charAppear 0s 5.56s both; }
+      .c2-5  { opacity:0; animation: charAppear 0s 5.68s both; }
+      .c2-6  { opacity:0; animation: charAppear 0s 5.80s both; }
+      .c2-7  { opacity:0; animation: charAppear 0s 5.92s both; }
+      .c2-8  { opacity:0; animation: charAppear 0s 6.04s both; }
+      .c2-9  { opacity:0; animation: charAppear 0s 6.16s both; }
+      .c2-10 { opacity:0; animation: charAppear 0s 6.28s both; }
+
+      /* ── CMD1 cursor ── */
+      @keyframes cur1move {
+        0%   { x: 139px; } 16%  { x: 148px; } 33%  { x: 156px; }
+        50%  { x: 165px; } 66%  { x: 173px; } 83%  { x: 182px; } 100% { x: 190px; }
+      }
+      .cur-cmd1 {
+        animation: cur1move 0.72s steps(6,end) 0.9s both,
+                   blink 0.65s step-end 1.62s infinite;
+      }
+
+      /* ── CMD2 cursor ── */
+      @keyframes cur2move {
+        0%   { x:139px;} 10%{x:148px;} 20%{x:156px;} 30%{x:165px;}
+        40%  { x:173px;} 50%{x:182px;} 60%{x:190px;} 70%{x:199px;}
+        80%  { x:207px;} 90%{x:215px;} 100%{x:224px;}
+      }
+      .cur-cmd2 {
+        animation: cur2move 1.2s steps(10,end) 5.2s both,
+                   blink 0.65s step-end 6.4s infinite;
+      }
+
+      /* ── ROLES output box ── */
+      .output-box { opacity:0; animation: slideBox 0.25s cubic-bezier(0.34,1.56,0.64,1) 7.0s both; }
+
+      /* ── Role switcher ── */
+      @keyframes role1life {
+        0%{opacity:0;transform:translateX(-4px);}  3%{opacity:1;transform:translateX(0);}
+        53%{opacity:1;transform:translateX(0);}   68%{opacity:0;transform:translateX(4px);}
+        100%{opacity:0;transform:translateX(4px);}
+      }
+      @keyframes role2life {
+        0%{opacity:0;transform:translateX(-4px);} 62%{opacity:0;transform:translateX(-4px);}
+        75%{opacity:1;transform:translateX(0);}   93%{opacity:1;transform:translateX(0);}
+        100%{opacity:0;transform:translateX(4px);}
+      }
+      .role1-text { opacity:0; animation: role1life 4.2s ease-in-out 7.2s infinite; }
+      .role2-text { opacity:0; animation: role2life 4.2s ease-in-out 7.2s infinite; }
+
+      /* ════════════════════════════════
+         CMD3 — cat ./skills.txt  (15 chars)
+         starts typing at 10.20s, interval 0.12s each
+         c=10.20, a=10.32, t=10.44, ' '=10.56, .=10.68, /=10.80,
+         s=10.92, k=11.04, i=11.16, l=11.28, l=11.40, s=11.52,
+         .=11.64, t=11.76, x=11.88, t=12.00
+      ════════════════════════════════ */
+      .prompt3-g { opacity:0; animation: popIn 0.08s ease-out 9.5s both; }
+
+      .c3-1  { opacity:0; animation: charAppear 0s 10.20s both; }
+      .c3-2  { opacity:0; animation: charAppear 0s 10.32s both; }
+      .c3-3  { opacity:0; animation: charAppear 0s 10.44s both; }
+      .c3-4  { opacity:0; animation: charAppear 0s 10.56s both; }
+      .c3-5  { opacity:0; animation: charAppear 0s 10.68s both; }
+      .c3-6  { opacity:0; animation: charAppear 0s 10.80s both; }
+      .c3-7  { opacity:0; animation: charAppear 0s 10.92s both; }
+      .c3-8  { opacity:0; animation: charAppear 0s 11.04s both; }
+      .c3-9  { opacity:0; animation: charAppear 0s 11.16s both; }
+      .c3-10 { opacity:0; animation: charAppear 0s 11.28s both; }
+      .c3-11 { opacity:0; animation: charAppear 0s 11.40s both; }
+      .c3-12 { opacity:0; animation: charAppear 0s 11.52s both; }
+      .c3-13 { opacity:0; animation: charAppear 0s 11.64s both; }
+      .c3-14 { opacity:0; animation: charAppear 0s 11.76s both; }
+      .c3-15 { opacity:0; animation: charAppear 0s 11.88s both; }
+      .c3-16 { opacity:0; animation: charAppear 0s 12.00s both; }
+
+      /* CMD3 cursor */
+      @keyframes cur3move {
+        0%{x:139px;} 6.25%{x:148px;} 12.5%{x:156px;} 18.75%{x:165px;}
+        25%{x:173px;} 31.25%{x:182px;} 37.5%{x:190px;} 43.75%{x:199px;}
+        50%{x:207px;} 56.25%{x:215px;} 62.5%{x:224px;} 68.75%{x:232px;}
+        75%{x:240px;} 81.25%{x:249px;} 87.5%{x:257px;} 100%{x:265px;}
+      }
+      .cur-cmd3 {
+        animation: cur3move 1.92s steps(16,end) 10.2s both,
+                   blink 0.65s step-end 12.12s infinite;
+      }
+
+      /* ── Skills box & lines ── */
+      .skills-box { opacity:0; animation: slideBox 0.25s cubic-bezier(0.34,1.56,0.64,1) 12.2s both; }
+
+      @keyframes fadeSlideIn {
+        0%  { opacity:0; transform:translateX(-6px); }
+        100%{ opacity:1; transform:translateX(0); }
+      }
+      .sk-line1 { opacity:0; animation: fadeSlideIn 0.3s ease-out 12.50s both; }
+      .sk-line2 { opacity:0; animation: fadeSlideIn 0.3s ease-out 12.80s both; }
+      .sk-line3 { opacity:0; animation: fadeSlideIn 0.3s ease-out 13.10s both; }
+      .sk-line4 { opacity:0; animation: fadeSlideIn 0.3s ease-out 13.40s both; }
+      .sk-line5 { opacity:0; animation: fadeSlideIn 0.3s ease-out 13.70s both; }
+
+      /* ════════════════════════════════
+         CMD4 — ls Projects/  (13 chars)
+         l=17.70, s=17.82, ' '=17.94, P=18.06, r=18.18, o=18.30,
+         j=18.42, e=18.54, c=18.66, t=18.78, s=18.90, /=19.02 (12 chars)
+      ════════════════════════════════ */
+      .prompt4-g { opacity:0; animation: popIn 0.08s ease-out 17.0s both; }
+
+      .c4-1  { opacity:0; animation: charAppear 0s 17.70s both; }
+      .c4-2  { opacity:0; animation: charAppear 0s 17.82s both; }
+      .c4-3  { opacity:0; animation: charAppear 0s 17.94s both; }
+      .c4-4  { opacity:0; animation: charAppear 0s 18.06s both; }
+      .c4-5  { opacity:0; animation: charAppear 0s 18.18s both; }
+      .c4-6  { opacity:0; animation: charAppear 0s 18.30s both; }
+      .c4-7  { opacity:0; animation: charAppear 0s 18.42s both; }
+      .c4-8  { opacity:0; animation: charAppear 0s 18.54s both; }
+      .c4-9  { opacity:0; animation: charAppear 0s 18.66s both; }
+      .c4-10 { opacity:0; animation: charAppear 0s 18.78s both; }
+      .c4-11 { opacity:0; animation: charAppear 0s 18.90s both; }
+      .c4-12 { opacity:0; animation: charAppear 0s 19.02s both; }
+
+      /* CMD4 cursor */
+      @keyframes cur4move {
+        0%{x:139px;} 8.33%{x:148px;} 16.67%{x:156px;} 25%{x:165px;}
+        33.33%{x:173px;} 41.67%{x:182px;} 50%{x:190px;} 58.33%{x:199px;}
+        66.67%{x:207px;} 75%{x:215px;} 83.33%{x:224px;} 100%{x:232px;}
+      }
+      .cur-cmd4 {
+        animation: cur4move 1.44s steps(12,end) 17.7s both,
+                   blink 0.65s step-end 19.14s infinite;
+      }
+
+      /* ── Projects box & items ── */
+      .projects-box { opacity:0; animation: slideBox 0.25s cubic-bezier(0.34,1.56,0.64,1) 19.6s both; }
+
+      .pr-item1 { opacity:0; animation: fadeSlideIn 0.3s ease-out 19.90s both; }
+      .pr-item2 { opacity:0; animation: fadeSlideIn 0.3s ease-out 20.20s both; }
+      .pr-item3 { opacity:0; animation: fadeSlideIn 0.3s ease-out 20.50s both; }
+      .pr-item4 { opacity:0; animation: fadeSlideIn 0.3s ease-out 20.80s both; }
+
+    </style>
+
+    <pattern id="scanlines" x="0" y="0" width="780" height="4" patternUnits="userSpaceOnUse">
+      <rect y="0" width="780" height="2" fill="rgba(0,0,0,0.18)"/>
+      <rect y="2" width="780" height="2" fill="transparent"/>
+    </pattern>
+
+    <filter id="textGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="nameGlow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="dimGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+  </defs>
+
+  <!-- ── BACKGROUND ── -->
+  <rect width="780" height="900" fill="#0d0d0d" rx="6"/>
+
+  <!-- title bar -->
+  <rect x="0" y="0" width="780" height="32" fill="#1a1a1a" rx="6"/>
+  <rect x="0" y="20" width="780" height="12" fill="#1a1a1a"/>
+  <circle cx="22" cy="16" r="6" fill="#ff5f57"/>
+  <circle cx="42" cy="16" r="6" fill="#febc2e"/>
+  <circle cx="62" cy="16" r="6" fill="#28c840"/>
+  <text x="390" y="21" class="mono" font-size="11" fill="#666" text-anchor="middle">varun@dev — terminal</text>
+
+  <rect x="0" y="32" width="780" height="868" fill="#0d0d0d"/>
+
+  <g class="screen-g">
+
+    <!-- ════ PROMPT 1 — whoami ════ -->
+    <text x="30" y="78" class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)">
+      <tspan fill="#5faf5f">varun</tspan><tspan fill="#888">@</tspan><tspan fill="#5faf5f">dev</tspan><tspan fill="#888">:</tspan><tspan fill="#6699ff">~</tspan><tspan fill="#888">$</tspan><tspan fill="#00ff41"> </tspan>
+    </text>
+    <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="139" y="78" class="c1-1">w</tspan></text>
+    <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="148" y="78" class="c1-2">h</tspan></text>
+    <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="156" y="78" class="c1-3">o</tspan></text>
+    <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="165" y="78" class="c1-4">a</tspan></text>
+    <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="173" y="78" class="c1-5">m</tspan></text>
+    <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="182" y="78" class="c1-6">i</tspan></text>
+    <rect y="62" width="8" height="16" fill="#00ff41" filter="url(#textGlow)" class="cur-cmd1"/>
+
+    <!-- ════ OUTPUT 1 — VARUN MENDRE ════ -->
+    <g class="varun-g">
+      <text x="28" y="188" class="mono" font-size="104" font-weight="900"
+            fill="none" stroke="#00ff41" stroke-width="1.5"
+            letter-spacing="4" filter="url(#nameGlow)">VARUN</text>
+    </g>
+    <g class="mendre-g">
+      <text x="28" y="300" class="mono" font-size="104" font-weight="900"
+            fill="none" stroke="#00ff41" stroke-width="1.5"
+            letter-spacing="1" filter="url(#nameGlow)">MENDRE</text>
+    </g>
+
+    <!-- ════ PROMPT 2 — ls ./roles ════ -->
+    <g class="prompt2-g">
+      <text x="30" y="346" class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)">
+        <tspan fill="#5faf5f">varun</tspan><tspan fill="#888">@</tspan><tspan fill="#5faf5f">dev</tspan><tspan fill="#888">:</tspan><tspan fill="#6699ff">~</tspan><tspan fill="#888">$</tspan><tspan fill="#00ff41"> </tspan>
+      </text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="139" y="346" class="c2-1">l</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="148" y="346" class="c2-2">s</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="156" y="346" class="c2-3"> </tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="165" y="346" class="c2-4">.</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="173" y="346" class="c2-5">/</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="182" y="346" class="c2-6">r</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="190" y="346" class="c2-7">o</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="199" y="346" class="c2-8">l</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="207" y="346" class="c2-9">e</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="215" y="346" class="c2-10">s</tspan></text>
+      <rect y="330" width="8" height="16" fill="#00ff41" filter="url(#textGlow)" class="cur-cmd2"/>
+    </g>
+
+    <!-- ════ OUTPUT 2 — Role switcher ════ -->
+    <g class="output-box">
+      <rect x="28" y="368" width="724" height="56" rx="2"
+            fill="rgba(0,255,65,0.05)" stroke="#00ff41" stroke-width=".8" stroke-opacity=".5"/>
+      <rect x="28" y="368" width="3" height="56" fill="#00ff41" fill-opacity=".9"/>
+      <g class="role1-text">
+        <text x="48" y="402" class="mono" font-size="18" fill="#00ff41" letter-spacing="1" filter="url(#textGlow)">
+          <tspan fill="#5faf5f">›</tspan>  Software Developer
+        </text>
+      </g>
+      <g class="role2-text">
+        <text x="48" y="402" class="mono" font-size="18" fill="#00ff41" letter-spacing="1" filter="url(#textGlow)">
+          <tspan fill="#5faf5f">›</tspan>  Backend Developer
+        </text>
+      </g>
+    </g>
+
+    <!-- ════ PROMPT 3 — cat ./skills.txt ════ -->
+    <g class="prompt3-g">
+      <text x="30" y="450" class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)">
+        <tspan fill="#5faf5f">varun</tspan><tspan fill="#888">@</tspan><tspan fill="#5faf5f">dev</tspan><tspan fill="#888">:</tspan><tspan fill="#6699ff">~</tspan><tspan fill="#888">$</tspan><tspan fill="#00ff41"> </tspan>
+      </text>
+      <!-- c a t   . / s k i l l s . t x t -->
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="139" y="450" class="c3-1">c</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="148" y="450" class="c3-2">a</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="156" y="450" class="c3-3">t</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="165" y="450" class="c3-4"> </tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="173" y="450" class="c3-5">.</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="182" y="450" class="c3-6">/</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="190" y="450" class="c3-7">s</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="199" y="450" class="c3-8">k</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="207" y="450" class="c3-9">i</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="215" y="450" class="c3-10">l</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="224" y="450" class="c3-11">l</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="232" y="450" class="c3-12">s</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="240" y="450" class="c3-13">.</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="249" y="450" class="c3-14">t</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="257" y="450" class="c3-15">x</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="265" y="450" class="c3-16">t</tspan></text>
+      <rect y="434" width="8" height="16" fill="#00ff41" filter="url(#textGlow)" class="cur-cmd3"/>
+    </g>
+
+    <!-- ════ OUTPUT 3 — Skills ════ -->
+    <g class="skills-box">
+      <rect x="28" y="468" width="724" height="178" rx="2"
+            fill="rgba(0,255,65,0.04)" stroke="#00ff41" stroke-width=".8" stroke-opacity=".4"/>
+      <rect x="28" y="468" width="3" height="178" fill="#00ff41" fill-opacity=".8"/>
+
+      <!-- Line 1: Backend -->
+      <g class="sk-line1">
+        <text x="48" y="495" class="mono" font-size="12" fill="#5faf5f" filter="url(#dimGlow)">Backend  </text>
+        <text x="130" y="495" class="mono" font-size="12" fill="#888">:</text>
+        <text x="145" y="495" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">Node.js / Express</text>
+      </g>
+
+      <!-- Line 2: Database -->
+      <g class="sk-line2">
+        <text x="48" y="518" class="mono" font-size="12" fill="#5faf5f" filter="url(#dimGlow)">DB       </text>
+        <text x="130" y="518" class="mono" font-size="12" fill="#888">:</text>
+        <text x="145" y="518" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">MongoDB / PostgreSQL / Redis</text>
+      </g>
+
+      <!-- Line 3: Cloud -->
+      <g class="sk-line3">
+        <text x="48" y="541" class="mono" font-size="12" fill="#5faf5f" filter="url(#dimGlow)">Cloud    </text>
+        <text x="130" y="541" class="mono" font-size="12" fill="#888">:</text>
+        <text x="145" y="541" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">AWS</text>
+      </g>
+
+      <!-- Line 4: DevOps -->
+      <g class="sk-line4">
+        <text x="48" y="564" class="mono" font-size="12" fill="#5faf5f" filter="url(#dimGlow)">DevOps   </text>
+        <text x="130" y="564" class="mono" font-size="12" fill="#888">:</text>
+        <text x="145" y="564" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">CI-CD Pipeline / GitHub Actions / PM2 / NGINX</text>
+      </g>
+
+      <!-- Line 5: Payment -->
+      <g class="sk-line5">
+        <text x="48" y="587" class="mono" font-size="12" fill="#5faf5f" filter="url(#dimGlow)">Payment  </text>
+        <text x="130" y="587" class="mono" font-size="12" fill="#888">:</text>
+        <text x="145" y="587" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">Razorpay / Stripe</text>
+      </g>
+
+      <!-- closing brace style -->
+      <text x="48" y="632" class="mono" font-size="11" fill="#444" filter="url(#dimGlow)">── 5 entries</text>
+    </g>
+
+    <!-- ════ PROMPT 4 — ls Projects/ ════ -->
+    <g class="prompt4-g">
+      <text x="30" y="672" class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)">
+        <tspan fill="#5faf5f">varun</tspan><tspan fill="#888">@</tspan><tspan fill="#5faf5f">dev</tspan><tspan fill="#888">:</tspan><tspan fill="#6699ff">~</tspan><tspan fill="#888">$</tspan><tspan fill="#00ff41"> </tspan>
+      </text>
+      <!-- l s   P r o j e c t s / -->
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="139" y="672" class="c4-1">l</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="148" y="672" class="c4-2">s</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="156" y="672" class="c4-3"> </tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="165" y="672" class="c4-4">P</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="173" y="672" class="c4-5">r</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="182" y="672" class="c4-6">o</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="190" y="672" class="c4-7">j</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="199" y="672" class="c4-8">e</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="207" y="672" class="c4-9">c</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="215" y="672" class="c4-10">t</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="224" y="672" class="c4-11">s</tspan></text>
+      <text class="mono" font-size="14" fill="#00ff41" filter="url(#textGlow)"><tspan x="232" y="672" class="c4-12">/</tspan></text>
+      <rect y="656" width="8" height="16" fill="#00ff41" filter="url(#textGlow)" class="cur-cmd4"/>
+    </g>
+
+    <!-- ════ OUTPUT 4 — Projects ════ -->
+    <g class="projects-box">
+      <rect x="28" y="690" width="724" height="136" rx="2"
+            fill="rgba(0,255,65,0.04)" stroke="#00ff41" stroke-width=".8" stroke-opacity=".4"/>
+      <rect x="28" y="690" width="3" height="136" fill="#00ff41" fill-opacity=".8"/>
+
+      <g class="pr-item1">
+        <text x="48" y="716" class="mono" font-size="13" fill="#00ff41" filter="url(#textGlow)">
+          <tspan fill="#5faf5f">drwxr-xr-x</tspan>  <tspan fill="#6699ff">Storage-App</tspan>
+        </text>
+      </g>
+      <g class="pr-item2">
+        <text x="48" y="738" class="mono" font-size="13" fill="#00ff41" filter="url(#textGlow)">
+          <tspan fill="#5faf5f">drwxr-xr-x</tspan>  <tspan fill="#6699ff">Custom-CI-CD-Server</tspan>
+        </text>
+      </g>
+      <g class="pr-item3">
+        <text x="48" y="760" class="mono" font-size="13" fill="#00ff41" filter="url(#textGlow)">
+          <tspan fill="#5faf5f">drwxr-xr-x</tspan>  <tspan fill="#6699ff">Chat-Room</tspan>
+        </text>
+      </g>
+      <g class="pr-item4">
+        <text x="48" y="782" class="mono" font-size="13" fill="#00ff41" filter="url(#textGlow)">
+          <tspan fill="#5faf5f">drwxr-xr-x</tspan>  <tspan fill="#6699ff">Img-Compressor</tspan>
+        </text>
+      </g>
+
+      <text x="48" y="816" class="mono" font-size="11" fill="#444">── 4 directories</text>
+    </g>
+
+    <!-- ════ STATUS BAR ════ -->
+    <rect x="0" y="874" width="780" height="26" fill="#111"/>
+    <text x="30" y="891" class="mono" font-size="10" fill="#444">github.com/varunmendre</text>
+    <text x="580" y="891" class="mono" font-size="10" fill="#444">INSERT  ·  utf-8  ·  bash</text>
+
+    <!-- SCANLINES -->
+    <rect x="0" y="32" width="780" height="842" fill="url(#scanlines)" opacity=".5"/>
+
+    <!-- boot sweep -->
+    <rect x="0" y="32" width="780" height="3" fill="#00ff41" opacity="0">
+      <animate attributeName="opacity" values="0;.4;0" dur="0.75s" begin="0s" repeatCount="1"/>
+      <animateTransform attributeName="transform" type="translate"
+                        from="0,0" to="0,870" dur="0.75s" begin="0s" repeatCount="1"/>
+    </rect>
+
+  </g>
+</svg>
