@@ -1,5 +1,5 @@
 <div align="center">
 
-![](./terminal-banner-final.svg)
+![](./varun_profile (1).svg)
 
 </div>
