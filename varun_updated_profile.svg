@@ -430,6 +430,13 @@
         <text x="145" y="607" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">Razorpay / Stripe</text>
       </g>
 
+      <!-- Line 7: Observability -->
+      <g class="sk-line6">
+        <text x="48" y="607" class="mono" font-size="12" fill="#5faf5f" filter="url(#dimGlow)">Observability  </text>
+        <text x="130" y="607" class="mono" font-size="12" fill="#888">:</text>
+        <text x="145" y="607" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">Prometheus </text>
+      </g>
+
       <!-- closing -->
       <text x="48" y="655" class="mono" font-size="11" fill="#444" filter="url(#dimGlow)">-- 6 entries</text>
     </g>
