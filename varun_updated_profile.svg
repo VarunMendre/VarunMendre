@@ -413,7 +413,7 @@
       <g class="sk-line4">
         <text x="48" y="561" class="mono" font-size="12" fill="#5faf5f" filter="url(#dimGlow)">Cloud    </text>
         <text x="130" y="561" class="mono" font-size="12" fill="#888">:</text>
-        <text x="145" y="561" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">AWS</text>
+        <text x="145" y="561" class="mono" font-size="12" fill="#00ff41" filter="url(#textGlow)">AWS / DigitalOcean</text>
       </g>
 
       <!-- Line 5: DevOps -->
